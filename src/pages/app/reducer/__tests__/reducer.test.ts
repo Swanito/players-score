@@ -1,4 +1,4 @@
-import { SET_LOADING_ACTION } from '../../../../constants/constants';
+import { ADD_PLAYER_SCORE_ACTION, SET_LOADING_ACTION, SET_RANKING_ACTION } from '../../../../constants/constants';
 import { reducer, initialState, Action, State } from '../reducer';
 
 describe('reducer', () => {
@@ -25,7 +25,7 @@ describe('reducer', () => {
             users: [{ _id: 1, name: 'Player1' }],
             scores: [],
         };
-        const action: Action = { type: 'ADD_PLAYER_SCORE', payload: { player: 'Player2', score: 100 } };
+        const action: Action = { type: ADD_PLAYER_SCORE_ACTION, payload: { player: 'Player2', score: 100 } };
         const newState = reducer(state, action);
         expect(newState.users).toEqual([
             { _id: 1, name: 'Player1' },
@@ -35,7 +35,7 @@ describe('reducer', () => {
     });
 
     it('should handle SET_RANKING', () => {
-        const action: Action = { type: 'SET_RANKING', payload: [{ name: 'Player1', maxScore: 100, allScores: [100], isExpanded: false }] };
+        const action: Action = { type: SET_RANKING_ACTION, payload: [{ name: 'Player1', maxScore: 100, allScores: [100], isExpanded: false }] };
         const newState = reducer(initialState, action);
         expect(newState.ranking).toEqual([{ name: 'Player1', maxScore: 100, allScores: [100], isExpanded: false }]);
     });

@@ -68,3 +68,14 @@ If you then add a name and a score via the form with the name `Pierce` and score
   * Barry - 917
   * Hedvig - 903
   * Glen - 607
+
+## Implemented features
+
+1. Adding a score manually
+2. Displaying the full list of scores
+3. Dropping and importing an excel file
+4. Some unit testing
+
+## Running tests
+
+For running the tests using Jest, simply run the script `npm run test`.

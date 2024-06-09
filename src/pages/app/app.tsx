@@ -7,7 +7,7 @@ import { NewScoreForm } from '../../components/form';
 import initialUsers from '../../data/users';
 import initialScores from '../../data/scores';
 import { reducer, initialState, sortUsersAndScores } from './reducer/reducer';
-import { ADD_PLAYER_SCORE_ACTION, SET_LOADING_ACTION } from '../../constants/constants';
+import { ADD_PLAYER_SCORE_ACTION, SET_LOADING_ACTION, SET_RANKING_ACTION } from '../../constants/constants';
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, {
@@ -15,6 +15,7 @@ export default function App() {
     users: initialUsers,
     scores: initialScores,
   });
+
   const toast = useToast();
 
   const handleSheetData = (data: ExcelRow[]) => {
@@ -43,7 +44,8 @@ export default function App() {
 
   useEffect(() => {
     const ranking = sortUsersAndScores(state.users, state.scores);
-    dispatch({ type: 'SET_RANKING', payload: ranking });
+    dispatch({ type: SET_RANKING_ACTION, payload: ranking });
+    dispatch({ type: SET_LOADING_ACTION, payload: false });
   }, [state.users, state.scores]);
 
   const ranking = useMemo(() => state.ranking, [state.ranking]);
