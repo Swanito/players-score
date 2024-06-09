@@ -53,7 +53,7 @@ interface ExpandedRankingTableRowProps {
 function ExpandedRankingTableRow({ scores }: ExpandedRankingTableRowProps) {
     return (
         <>
-            {scores.map((score, index) => (
+            {scores.slice(1, scores.length).map((score, index) => (
                 <Tr key={index}>
                     <Td colSpan={2} textAlign={"right"}>{score}</Td>
                 </Tr>

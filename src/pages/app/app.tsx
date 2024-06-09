@@ -7,7 +7,7 @@ import { NewScoreForm } from '../../components/form';
 import initialUsers from '../../data/users';
 import initialScores from '../../data/scores';
 import { reducer, initialState, sortUsersAndScores } from './reducer/reducer';
-import './app.css';
+import { ADD_PLAYER_SCORE_ACTION, SET_LOADING_ACTION } from '../../constants/constants';
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, {
@@ -27,11 +27,11 @@ export default function App() {
 
   const handleNewPlayerScore = (event: FormEvent<HTMLFormElement>, values: { player: string; score: number }) => {
     event.preventDefault();
-    dispatch({ type: 'SET_LOADING', payload: true });
+    dispatch({ type: SET_LOADING_ACTION, payload: true });
 
-    dispatch({ type: 'ADD_PLAYER_SCORE', payload: { player: values.player, score: values.score } });
+    dispatch({ type: ADD_PLAYER_SCORE_ACTION, payload: { player: values.player, score: values.score } });
 
-    dispatch({ type: 'SET_LOADING', payload: false });
+    dispatch({ type: SET_LOADING_ACTION, payload: false });
     toast({
       title: 'Score added',
       description: 'Your score has been successfully stored!',

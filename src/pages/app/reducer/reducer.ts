@@ -1,4 +1,5 @@
 import { RankingPosition } from '../../../components/ranking-table';
+import { SET_LOADING_ACTION, ADD_PLAYER_SCORE_ACTION, SET_RANKING_ACTION } from '../../../constants/constants';
 
 interface Score {
     userId: number;
@@ -18,9 +19,9 @@ interface State {
 }
 
 type Action =
-    | { type: 'SET_LOADING'; payload: boolean }
-    | { type: 'ADD_PLAYER_SCORE'; payload: { player: string; score: number } }
-    | { type: 'SET_RANKING'; payload: RankingPosition[] };
+    | { type: typeof SET_LOADING_ACTION; payload: boolean }
+    | { type: typeof ADD_PLAYER_SCORE_ACTION; payload: { player: string; score: number } }
+    | { type: typeof SET_RANKING_ACTION; payload: RankingPosition[] };
 
 const initialState: State = {
     isLoading: false,
@@ -70,15 +71,15 @@ function sortUsersAndScores(users: User[], scores: Score[]): RankingPosition[] {
 
 function reducer(state: State, action: Action): State {
     switch (action.type) {
-        case 'SET_LOADING':
+        case SET_LOADING_ACTION:
             return { ...state, isLoading: action.payload };
-        case 'ADD_PLAYER_SCORE':
+        case ADD_PLAYER_SCORE_ACTION:
             const updatedUsers = addOrUpdateUser(state.users, action.payload.player);
             const newScore = createScore(updatedUsers, action.payload.player, action.payload.score);
             const updatedScores = [...state.scores, newScore];
             const updatedRanking = sortUsersAndScores(updatedUsers, updatedScores);
             return { ...state, users: updatedUsers, scores: updatedScores, ranking: updatedRanking };
-        case 'SET_RANKING':
+        case SET_RANKING_ACTION:
             return { ...state, ranking: action.payload };
         default:
             return state;

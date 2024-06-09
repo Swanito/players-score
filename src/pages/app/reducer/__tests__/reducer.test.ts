@@ -1,8 +1,9 @@
+import { SET_LOADING_ACTION } from '../../../../constants/constants';
 import { reducer, initialState, Action, State } from '../reducer';
 
 describe('reducer', () => {
     it('should handle SET_LOADING', () => {
-        const action: Action = { type: 'SET_LOADING', payload: true };
+        const action: Action = { type: SET_LOADING_ACTION, payload: true };
         const newState = reducer(initialState, action);
         expect(newState.isLoading).toBe(true);
     });
